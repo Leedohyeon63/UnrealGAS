@@ -4,7 +4,8 @@
 #include "Character/TestCharacter.h"
 #include "AbilitySystemComponent.h"
 #include "GameAbility/StatusAttributeSet.h"
-
+#include "Components/WidgetComponent.h"
+#include "Interface/TwinResource.h"
 // Sets default values
 ATestCharacter::ATestCharacter()
 {
@@ -13,6 +14,8 @@ ATestCharacter::ATestCharacter()
 	//컴포넌트 생성
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	StatusAttributeSet = CreateDefaultSubobject<UStatusAttributeSet>(TEXT("StatusAttributeSet"));
+	BarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("BarWidgetComponent"));
+	BarWidgetComponent->SetupAttachment(RootComponent);
 
 }
 
@@ -42,6 +45,19 @@ void ATestCharacter::BeginPlay()
 	if (StatusAttributeSet)
 	{
 		StatusAttributeSet->SetHealth(50.0f); //무조건 setter사용해서 변경
+		
+		if (BarWidgetComponent && BarWidgetComponent->GetWidget())
+		{
+			if (BarWidgetComponent->GetWidget()->Implements<UTwinResource>())
+			{
+				ITwinResource::Execute_UpdateMaxHealth(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMaxHealth());
+				ITwinResource::Execute_UpdateCurrentHealth(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetHealth());
+
+				ITwinResource::Execute_UpdateMaxMana(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMaxMana());
+				ITwinResource::Execute_UpdateCurrentMana(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMana());
+			}
+
+		}
 	}
 }
 
@@ -63,5 +79,13 @@ void ATestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void ATestCharacter::OnHealthChange(const FOnAttributeChangeData& InData)
 {
 	UE_LOG(LogTemp, Log, TEXT("Health가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
+	ITwinResource::Execute_UpdateCurrentHealth(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetHealth());
+
+}
+
+void ATestCharacter::OnManaChange(const FOnAttributeChangeData& InData)
+{
+	UE_LOG(LogTemp, Log, TEXT("Mana가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
+	ITwinResource::Execute_UpdateCurrentMana(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMana());
 }
 

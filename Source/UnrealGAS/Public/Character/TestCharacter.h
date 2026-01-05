@@ -8,7 +8,7 @@
 #include "GameplayEffectTypes.h"
 #include "TestCharacter.generated.h"
 class UStatusAttributeSet;
-
+class UWidgetComponent;
 UCLASS()
 class UNREALGAS_API ATestCharacter : public ACharacter, public IAbilitySystemInterface
 {
@@ -37,9 +37,13 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent = nullptr;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
+	TObjectPtr<UWidgetComponent> BarWidgetComponent = nullptr;
+
 private:
 	UPROPERTY()
 	TObjectPtr<UStatusAttributeSet> StatusAttributeSet = nullptr;
 
 	void OnHealthChange(const FOnAttributeChangeData& InData);
+	void OnManaChange(const FOnAttributeChangeData& InData);
 };
