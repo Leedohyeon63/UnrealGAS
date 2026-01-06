@@ -36,4 +36,6 @@ protected:
 private:
 	float MaxValue = 1.0f;
 
+	float CurrentValue = 0.0f;
+
 };

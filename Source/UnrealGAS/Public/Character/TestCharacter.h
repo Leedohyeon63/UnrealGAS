@@ -24,6 +24,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ChangeHP(float Amount);
+	void TestSetByCaller();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -33,6 +34,8 @@ protected:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test")
 	float HPAmount = 0.0f;
+
+	TSubclassOf<class UGameplayEffect> TestEffect = nullptr;
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent = nullptr;
@@ -45,5 +48,7 @@ private:
 	TObjectPtr<UStatusAttributeSet> StatusAttributeSet = nullptr;
 
 	void OnHealthChange(const FOnAttributeChangeData& InData);
+	void OnMaxHealthChange(const FOnAttributeChangeData& InData);
 	void OnManaChange(const FOnAttributeChangeData& InData);
+	void OnMaxManaChange(const FOnAttributeChangeData& InData);
 };

@@ -9,13 +9,15 @@
 void UTESTWidget::UpdateCurrent_Implementation(float InValue)
 {
 	Current->SetText(FText::AsNumber(FMath::RoundToInt(InValue)));
-	BAR->SetPercent(InValue / MaxValue);
+	CurrentValue = InValue;
+	BAR->SetPercent(CurrentValue / MaxValue);
 }
 
 void UTESTWidget::UpdateMax_Implementation(float InValue)
 {
-	Current->SetText(FText::AsNumber(FMath::RoundToInt(InValue)));
+	Max->SetText(FText::AsNumber(FMath::RoundToInt(InValue)));
 	MaxValue = InValue;
+	BAR->SetPercent(CurrentValue / MaxValue);
 }
 
 void UTESTWidget::SetWidgetColor(FLinearColor InColor)

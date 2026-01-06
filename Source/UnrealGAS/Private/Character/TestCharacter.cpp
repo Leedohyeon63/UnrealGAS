@@ -28,6 +28,14 @@ void ATestCharacter::ChangeHP(float Amount)
 	}
 }
 
+void ATestCharacter::TestSetByCaller()
+{
+	if (AbilitySystemComponent)
+	{
+		//AbilitySystemComponent->MakeOutgoingSpec(TestEffect);
+	}
+}
+
 // Called when the game starts or when spawned
 void ATestCharacter::BeginPlay()
 {
@@ -40,6 +48,22 @@ void ATestCharacter::BeginPlay()
 		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UStatusAttributeSet::GetHealthAttribute());
 
 		OnHealthChange.AddUObject(this, &ATestCharacter::OnHealthChange);
+
+		FOnGameplayAttributeValueChange& OnMaxHealthChange =
+			AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UStatusAttributeSet::GetMaxHealthAttribute());
+
+		OnMaxHealthChange.AddUObject(this, &ATestCharacter::OnMaxHealthChange);
+
+		FOnGameplayAttributeValueChange& OnManaChange =
+			AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UStatusAttributeSet::GetManaAttribute());
+
+		OnManaChange.AddUObject(this, &ATestCharacter::OnManaChange);
+
+		FOnGameplayAttributeValueChange& OnMaxManaChange =
+			AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UStatusAttributeSet::GetMaxManaAttribute());
+
+		OnMaxManaChange.AddUObject(this, &ATestCharacter::OnMaxManaChange);
+
 	}
 
 	if (StatusAttributeSet)
@@ -83,9 +107,21 @@ void ATestCharacter::OnHealthChange(const FOnAttributeChangeData& InData)
 
 }
 
+void ATestCharacter::OnMaxHealthChange(const FOnAttributeChangeData& InData)
+{
+	UE_LOG(LogTemp, Log, TEXT("MaxHealth가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
+	ITwinResource::Execute_UpdateMaxHealth(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMaxHealth());
+}
+
 void ATestCharacter::OnManaChange(const FOnAttributeChangeData& InData)
 {
 	UE_LOG(LogTemp, Log, TEXT("Mana가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
 	ITwinResource::Execute_UpdateCurrentMana(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMana());
+}
+
+void ATestCharacter::OnMaxManaChange(const FOnAttributeChangeData& InData)
+{
+	UE_LOG(LogTemp, Log, TEXT("MaxMana가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
+	ITwinResource::Execute_UpdateMaxMana(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMaxMana());
 }
 
