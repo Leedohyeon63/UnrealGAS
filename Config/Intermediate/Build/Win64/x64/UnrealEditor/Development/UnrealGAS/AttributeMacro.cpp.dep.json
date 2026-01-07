@@ -1,0 +1,16 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\kga\\source\\repos\\unrealgas\\source\\unrealgas\\private\\gameability\\attributemacro.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\kga\\source\\repos\\unrealgas\\intermediate\\build\\win64\\x64\\unrealgaseditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderunreal5_3.h.pch",
+        "Includes": [
+            "c:\\users\\kga\\source\\repos\\unrealgas\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\unrealgas\\definitions.unrealgas.h",
+            "c:\\users\\kga\\source\\repos\\unrealgas\\source\\unrealgas\\public\\gameability\\attributemacro.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\source\\gameplayabilities\\public\\attributeset.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\intermediate\\build\\win64\\unrealeditor\\inc\\gameplayabilities\\uht\\attributeset.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

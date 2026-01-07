@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\KGA\\source\\repos\\UnrealGAS\\Source\\UnrealGAS\\UnrealGAS.Build.cs",
+		"C:\\Users\\KGA\\source\\repos\\UnrealGAS\\Source\\UnrealGAS.Target.cs",
+		"C:\\Users\\KGA\\source\\repos\\UnrealGAS\\Source\\UnrealGASEditor.Target.cs"
+	],
+	"EngineVersion": "5.5.4"
+}

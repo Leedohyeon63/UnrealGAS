@@ -30,7 +30,7 @@ UGEEC_FireDamage::UGEEC_FireDamage()
 	RelevantAttributesToCapture.Add(FireDamageStatics().AttackPowerDef);
 	Tag_DebuffBurn = FGameplayTag::RequestGameplayTag(FName("State.Debuff.Burn"));;
 	Tag_ElementFire = FGameplayTag::RequestGameplayTag(FName("Element.Fire"));
-	Tag_DataDamage = FGameplayTag::RequestGameplayTag(FName("Data.Damage"));
+	Tag_DataDamage = FGameplayTag::RequestGameplayTag(FName("Effect.Damage"));
 }
 
 void UGEEC_FireDamage::Execute_Implementation(

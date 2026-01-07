@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "UnrealGAS",
+			"Path": "..\\Source\\UnrealGAS.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "UnrealGASEditor",
+			"Path": "..\\Source\\UnrealGASEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

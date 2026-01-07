@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\UnrealGAS.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\UnrealGAS.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\UnrealGASEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.gitignore" />
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGameplayTags.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\UnrealGAS">
+      <UniqueIdentifier>{CD316152-4667-3734-8D14-50B99C80344D}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UnrealGAS\TestActor.cpp">
+      <Filter>Source\UnrealGAS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\TestActor.h">
+      <Filter>Source\UnrealGAS</Filter>
+    </ClCompile>
+    <None Include="..\..\Source\UnrealGAS\UnrealGAS.Build.cs">
+      <Filter>Source\UnrealGAS</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\UnrealGAS\UnrealGAS.cpp">
+      <Filter>Source\UnrealGAS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\UnrealGAS.h">
+      <Filter>Source\UnrealGAS</Filter>
+    </ClCompile>
+    <Filter Include="Source\UnrealGAS\Private">
+      <UniqueIdentifier>{C827C7D7-91CD-3E1F-B46B-2D177001CC30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UnrealGAS\Private\Character">
+      <UniqueIdentifier>{AB9522E0-F840-301C-B49F-F3D108D3E724}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UnrealGAS\Private\Character\CharacterWidgetComponent.cpp">
+      <Filter>Source\UnrealGAS\Private\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Private\Character\TestCharacter.cpp">
+      <Filter>Source\UnrealGAS\Private\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Private\Character\TESTWidget.cpp">
+      <Filter>Source\UnrealGAS\Private\Character</Filter>
+    </ClCompile>
+    <Filter Include="Source\UnrealGAS\Private\GameAbility">
+      <UniqueIdentifier>{F44706FE-B242-3DA0-A508-879D456B5CAF}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UnrealGAS\Private\GameAbility\AttributeMacro.cpp">
+      <Filter>Source\UnrealGAS\Private\GameAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Private\GameAbility\CharacterAttributeSet.cpp">
+      <Filter>Source\UnrealGAS\Private\GameAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Private\GameAbility\GEEC_FireDamage.cpp">
+      <Filter>Source\UnrealGAS\Private\GameAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Private\GameAbility\StatusAttributeSet.cpp">
+      <Filter>Source\UnrealGAS\Private\GameAbility</Filter>
+    </ClCompile>
+    <Filter Include="Source\UnrealGAS\Private\Interface">
+      <UniqueIdentifier>{B0C3E64D-2A85-3574-8C9D-6BBA921F52D9}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UnrealGAS\Private\Interface\Resource.cpp">
+      <Filter>Source\UnrealGAS\Private\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Private\Interface\TwinResource.cpp">
+      <Filter>Source\UnrealGAS\Private\Interface</Filter>
+    </ClCompile>
+    <Filter Include="Source\UnrealGAS\Public">
+      <UniqueIdentifier>{81115BEE-1638-3675-9D6F-FADCC1DC9E02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UnrealGAS\Public\Character">
+      <UniqueIdentifier>{E744988B-DEFF-362E-A59A-4441C5879A11}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UnrealGAS\Public\Character\CharacterWidgetComponent.h">
+      <Filter>Source\UnrealGAS\Public\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Public\Character\TestCharacter.h">
+      <Filter>Source\UnrealGAS\Public\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Public\Character\TESTWidget.h">
+      <Filter>Source\UnrealGAS\Public\Character</Filter>
+    </ClCompile>
+    <Filter Include="Source\UnrealGAS\Public\GameAbility">
+      <UniqueIdentifier>{9BC594FF-DC17-3C6D-8D65-C6327C48F7DF}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UnrealGAS\Public\GameAbility\AttributeMacro.h">
+      <Filter>Source\UnrealGAS\Public\GameAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Public\GameAbility\CharacterAttributeSet.h">
+      <Filter>Source\UnrealGAS\Public\GameAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Public\GameAbility\GEEC_FireDamage.h">
+      <Filter>Source\UnrealGAS\Public\GameAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Public\GameAbility\StatusAttributeSet.h">
+      <Filter>Source\UnrealGAS\Public\GameAbility</Filter>
+    </ClCompile>
+    <Filter Include="Source\UnrealGAS\Public\Interface">
+      <UniqueIdentifier>{CEB9D9F6-F505-3EC0-A92C-E5229BF66309}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UnrealGAS\Public\Interface\Resource.h">
+      <Filter>Source\UnrealGAS\Public\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UnrealGAS\Public\Interface\TwinResource.h">
+      <Filter>Source\UnrealGAS\Public\Interface</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

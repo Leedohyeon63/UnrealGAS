@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\kga\\source\\repos\\unrealgas\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealgas\\uht\\testactor.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\kga\\source\\repos\\unrealgas\\intermediate\\build\\win64\\x64\\unrealgaseditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderunreal5_3.h.pch",
+        "Includes": [
+            "c:\\users\\kga\\source\\repos\\unrealgas\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\unrealgas\\definitions.unrealgas.h",
+            "c:\\users\\kga\\source\\repos\\unrealgas\\source\\unrealgas\\testactor.h",
+            "c:\\users\\kga\\source\\repos\\unrealgas\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealgas\\uht\\testactor.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
