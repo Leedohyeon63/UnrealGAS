@@ -28,11 +28,43 @@ void ATestCharacter::ChangeHP(float Amount)
 	}
 }
 
-void ATestCharacter::TestSetByCaller()
+void ATestCharacter::TestSetByCaller(float Amount)
 {
 	if (AbilitySystemComponent)
 	{
-		//AbilitySystemComponent->MakeOutgoingSpec(TestEffect);
+		FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+		FGameplayEffectSpecHandle SpecHandle = 
+		AbilitySystemComponent->MakeOutgoingSpec(TestEffectClass, 0, EffectContext);
+		if (SpecHandle.IsValid())
+		{
+			SpecHandle.Data->SetSetByCallerMagnitude(TagEffectDamage,Amount);
+			AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+		}
+	}
+}
+
+void ATestCharacter::TestAddInfiniteEffect()
+{
+	if (TestInfiniteEffectClass && AbilitySystemComponent)
+	{
+		FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+		EffectContext.AddInstigator(this, this);
+
+		FGameplayEffectSpecHandle SpecHandle = AbilitySystemComponent->MakeOutgoingSpec(
+			TestInfiniteEffectClass, 0, EffectContext);
+
+		if (SpecHandle.IsValid())
+		{
+			TestInfinite = AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+		}
+	}
+}
+
+void ATestCharacter::TestRemoveInfiniteEffect()
+{
+	if (TestInfinite.IsValid())
+	{
+		AbilitySystemComponent->RemoveActiveGameplayEffect(TestInfinite);
 	}
 }
 
@@ -83,14 +115,20 @@ void ATestCharacter::BeginPlay()
 
 		}
 	}
+
+	TagEffectDamage = FGameplayTag::RequestGameplayTag(FName("Effect.Damage"));
 }
 
 // Called every frame
 void ATestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	FString HealthString = FString::Printf(TEXT("%.1f/%.1f"), StatusAttributeSet->GetHealth(), StatusAttributeSet->GetMaxHealth());
-	DrawDebugString(GetWorld(), GetActorLocation(), HealthString, nullptr, FColor::White, 0, true);
+
+	if (StatusAttributeSet)
+	{
+		FString HealthString = FString::Printf(TEXT("%.1f/%.1f"), StatusAttributeSet->GetHealth(), StatusAttributeSet->GetMaxHealth());
+		DrawDebugString(GetWorld(), GetActorLocation(), HealthString, nullptr, FColor::White, 0, true);
+	}
 }
 
 // Called to bind functionality to input
