@@ -68,6 +68,15 @@ void ATestCharacter::TestRemoveInfiniteEffect()
 	}
 }
 
+void ATestCharacter::TestAbility()
+{
+	if (AbilitySystemComponent && HasteClass)
+	{
+		// 클래스로 어빌리티 발동시키기
+		AbilitySystemComponent->TryActivateAbilityByClass(HasteClass);
+	}
+}
+
 // Called when the game starts or when spawned
 void ATestCharacter::BeginPlay()
 {
@@ -114,6 +123,18 @@ void ATestCharacter::BeginPlay()
 			}
 
 		}
+	}
+
+	if (HasteClass)
+	{
+		AbilitySystemComponent->GiveAbility(
+			FGameplayAbilitySpec(
+				HasteClass,		// 어빌리티 클래스
+				1,				// 레벨
+				-1,				// 입력 ID
+				this			// 소스
+			)
+		);
 	}
 
 	TagEffectDamage = FGameplayTag::RequestGameplayTag(FName("Effect.Damage"));

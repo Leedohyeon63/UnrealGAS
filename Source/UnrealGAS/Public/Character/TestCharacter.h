@@ -33,6 +33,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void TestRemoveInfiniteEffect();
+
+	UFUNCTION(BlueprintCallable)
+	void TestAbility();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -55,6 +59,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
 	TObjectPtr<UWidgetComponent> BarWidgetComponent = nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability")
+	TSubclassOf<UGameplayAbility> HasteClass = nullptr;
 private:
 	UPROPERTY()
 	TObjectPtr<UStatusAttributeSet> StatusAttributeSet = nullptr;

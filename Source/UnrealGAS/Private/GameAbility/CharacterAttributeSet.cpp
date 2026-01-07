@@ -10,7 +10,18 @@ UCharacterAttributeSet::UCharacterAttributeSet()
 	InitMoveSpeed(500.0f);
 	InitJumpPower(700.0f);
 	InitAttackPower(10.0f);
-	InitCriticalRate(0.0f);
+	InitCriticalRate(0.2f);
+}
+
+void UCharacterAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
+{
+	Super::PreAttributeChange(Attribute, NewValue);
+
+	if (Attribute == GetCriticalRateAttribute())
+	{
+		// 0 ~ 1
+		NewValue = FMath::Clamp(NewValue, 0.0f, 1.0f);
+	}
 }
 
 void UCharacterAttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
