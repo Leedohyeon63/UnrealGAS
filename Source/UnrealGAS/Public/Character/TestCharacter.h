@@ -40,6 +40,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void TestAbility();
 
+	UFUNCTION(BlueprintCallable)
+	void TestLineTrace();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -54,6 +57,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test")
 	TSubclassOf<class UGameplayEffect> TestInfiniteEffectClass = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test")
+	TSubclassOf<class UGameplayEffect> TestHitEffectClass = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Initialize")
 	TSubclassOf<class UGameplayEffect> InitializeEffectClass = nullptr;

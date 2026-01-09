@@ -6,6 +6,7 @@
 #include "GameAbility/StatusAttributeSet.h"
 #include "GameAbility/CharacterAttributeSet.h"
 #include "GameAbility/GameAbilitySystemEnums.h"
+#include "AbilitySystemBlueprintLibrary.h"
 #include "Components/WidgetComponent.h"
 #include "Interface/TwinResource.h"
 #include "EnhancedInputComponent.h"
@@ -222,5 +223,53 @@ void ATestCharacter::OnAbility1Press()
 	{
 		AbilitySystemComponent->AbilityLocalInputPressed(static_cast<int32>(EAbilityInputID::Haste));
 	}
+}
+
+void ATestCharacter::TestLineTrace()
+{
+	FHitResult HitResult;
+	FVector Start = GetActorLocation();
+	FVector End = Start + GetActorForwardVector()*1000.0f;
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
+
+	bool bHit = GetWorld()->LineTraceSingleByObjectType(
+		HitResult,
+		Start,
+		End,
+		ECC_Pawn,
+		QueryParams
+	);
+
+	if (bHit)
+	{
+		UE_LOG(LogTemp, Log, TEXT("히트"));
+		DrawDebugLine(GetWorld(), Start, HitResult.ImpactPoint, FColor::Red, false, 0.1f, 0, 1.0);
+		AActor* Target = HitResult.GetActor();
+		UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Target);
+		if (TargetASC && TestHitEffectClass)
+		{
+			FGameplayEffectContextHandle Context = TargetASC->MakeEffectContext();
+			Context.AddHitResult(HitResult);
+			Context.AddInstigator(GetInstigator(), this);
+
+			FGameplayEffectSpecHandle Spec = TargetASC->MakeOutgoingSpec(
+				TestEffectClass,
+				1,
+				Context
+			);
+
+			if (Spec.IsValid())
+			{
+				TargetASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
+			}
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("노히트"));
+
+	}
+
 }
 
