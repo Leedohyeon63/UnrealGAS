@@ -17,19 +17,19 @@ void UHaste::ActivateAbility(
 {
 	if (!EffectClass)
 	{
-		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);	// ÀÌÆÑÆ® Å¬·¡½º°¡ ¾ø¾î¼­ ½ÇÆÐ Ã³¸®
+		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);	// ï¿½ï¿½ï¿½ï¿½Æ® Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î¼­ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 		return;
 	}
 
 	if (!CommitAbility(Handle, ActorInfo, ActivationInfo))
 	{
-		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);	// ÄðÅ¸ÀÓÀÌ ¾ÈµÇ¾ú°Å³ª ÄÚ½ºÆ®°¡ ºÎÁ·ÇÏ´Ù.
+		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);	// ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÇ¾ï¿½ï¿½Å³ï¿½ ï¿½Ú½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
 		return;
 	}
 
 	UAbilitySystemComponent* ASC = ActorInfo->AbilitySystemComponent.Get();
 	FGameplayEffectContextHandle EffectContext = ASC->MakeEffectContext();
-	EffectContext.AddSourceObject(this);	// ¼Ò½º´Â ³ª
+	EffectContext.AddSourceObject(this);	// ï¿½Ò½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
 	FGameplayEffectSpecHandle SpecHandle = ASC->MakeOutgoingSpec(
 		EffectClass, GetAbilityLevel(), EffectContext);
@@ -39,5 +39,5 @@ void UHaste::ActivateAbility(
 		ASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 	}
 
-	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);	// ¼º°øÀûÀ¸·Î ³¡³µ´Ù.
+	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 }

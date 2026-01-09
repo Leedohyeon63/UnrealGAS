@@ -4,8 +4,12 @@
 #include "Character/TestCharacter.h"
 #include "AbilitySystemComponent.h"
 #include "GameAbility/StatusAttributeSet.h"
+#include "GameAbility/CharacterAttributeSet.h"
+#include "GameAbility/GameAbilitySystemEnums.h"
 #include "Components/WidgetComponent.h"
 #include "Interface/TwinResource.h"
+#include "EnhancedInputComponent.h"
+
 // Sets default values
 ATestCharacter::ATestCharacter()
 {
@@ -14,6 +18,7 @@ ATestCharacter::ATestCharacter()
 	//컴포넌트 생성
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	StatusAttributeSet = CreateDefaultSubobject<UStatusAttributeSet>(TEXT("StatusAttributeSet"));
+	CharacterAttributeSet = CreateDefaultSubobject<UCharacterAttributeSet>(TEXT("CharacterAttributeSet"));
 	BarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("BarWidgetComponent"));
 	BarWidgetComponent->SetupAttachment(RootComponent);
 
@@ -131,13 +136,23 @@ void ATestCharacter::BeginPlay()
 			FGameplayAbilitySpec(
 				HasteClass,		// 어빌리티 클래스
 				1,				// 레벨
-				-1,				// 입력 ID
+				static_cast<int32>(EAbilityInputID::Haste),				// 입력 ID
 				this			// 소스
 			)
 		);
 	}
 
 	TagEffectDamage = FGameplayTag::RequestGameplayTag(FName("Effect.Damage"));
+
+	if (InitializeEffectClass && AbilitySystemComponent)
+	{
+		FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+		FGameplayEffectSpecHandle SpecHandle = AbilitySystemComponent->MakeOutgoingSpec(InitializeEffectClass, 0, EffectContext);
+		if (SpecHandle.IsValid())
+		{
+			AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+		}
+	}
 }
 
 // Called every frame
@@ -156,31 +171,56 @@ void ATestCharacter::Tick(float DeltaTime)
 void ATestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+	if (EnhancedInput)
+	{
+		OnAbility1Press();
+	}
 }
 
 void ATestCharacter::OnHealthChange(const FOnAttributeChangeData& InData)
 {
-	UE_LOG(LogTemp, Log, TEXT("Health가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
-	ITwinResource::Execute_UpdateCurrentHealth(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetHealth());
-
+	if (StatusAttributeSet)
+	{
+		UE_LOG(LogTemp, Log, TEXT("Health가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
+		ITwinResource::Execute_UpdateCurrentHealth(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetHealth());
+	}
 }
 
 void ATestCharacter::OnMaxHealthChange(const FOnAttributeChangeData& InData)
 {
-	UE_LOG(LogTemp, Log, TEXT("MaxHealth가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
-	ITwinResource::Execute_UpdateMaxHealth(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMaxHealth());
+	if (StatusAttributeSet)
+	{
+		UE_LOG(LogTemp, Log, TEXT("On Health Change : %.1f -> %.1f"), InData.OldValue, InData.NewValue);
+		ITwinResource::Execute_UpdateCurrentHealth(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetHealth());
+	}
 }
 
 void ATestCharacter::OnManaChange(const FOnAttributeChangeData& InData)
 {
-	UE_LOG(LogTemp, Log, TEXT("Mana가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
-	ITwinResource::Execute_UpdateCurrentMana(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMana());
+	if (StatusAttributeSet)
+	{
+		UE_LOG(LogTemp, Log, TEXT("Mana가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
+		ITwinResource::Execute_UpdateCurrentMana(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMana());
+
+	}
 }
 
 void ATestCharacter::OnMaxManaChange(const FOnAttributeChangeData& InData)
 {
-	UE_LOG(LogTemp, Log, TEXT("MaxMana가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
-	ITwinResource::Execute_UpdateMaxMana(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMaxMana());
+	if (StatusAttributeSet)
+	{
+		UE_LOG(LogTemp, Log, TEXT("MaxMana가 변경되었다 %.1f -> %.1f"), InData.OldValue, InData.NewValue);
+		ITwinResource::Execute_UpdateMaxMana(BarWidgetComponent->GetWidget(), StatusAttributeSet->GetMaxMana());
+	}
+}
+
+void ATestCharacter::OnAbility1Press()
+{
+	UE_LOG(LogTemp, Log, TEXT("OnAbility1Press"));
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->AbilityLocalInputPressed(static_cast<int32>(EAbilityInputID::Haste));
+	}
 }
 
